@@ -1,0 +1,6 @@
+{
+	"name": "Ws_iPocket",
+	"description": "Web service rest for MEAN application",
+	"repository":"https://ramon_prata@bitbucket.org/ramon_prata/ws_ipocket.git",
+	"keywords": ["node", "express", "es6", "mean"],
+}
