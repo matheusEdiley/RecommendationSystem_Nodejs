@@ -8,7 +8,7 @@ let testStringConnection = "mongodb://127.0.0.1:27017/ws_az_test";
 let deployString = "mongodb://direitoja:abc12345@ds127963.mlab.com:27963/direitoja"
 //busca a string de conexão com banco dos arquivos na pasta /config
 //a variavel DBHost corresponde a string de conexão de acordo com o modo de execução(dev, test)
-const db_string_conexao = devStringConnection;
+const db_string_conexao = deployString;
 
 //é necessário informar ao mongoose qual library promise ele deve usar
 //para acesso assíncrono ao mongoDB

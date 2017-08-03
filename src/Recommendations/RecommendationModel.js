@@ -10,11 +10,7 @@ db.once('open', () => {
     const schema = mongoose.Schema;
     
     const stepOneSchema = new schema({
-
-        icon: {
-            type: String,
-            required: false
-        },
+     
         name: {
             type: String,
             required: false
@@ -29,10 +25,6 @@ db.once('open', () => {
 
     const stepTwoSchema = new schema({
 
-        icon: {
-            type: String,
-            required: false
-        },
         name: {
             type: String,
             required: false
@@ -51,10 +43,6 @@ db.once('open', () => {
 
     const stepThreeSchema = new schema({
 
-        icon: {
-            type: String,
-            required: false
-        },
         name: {
             type: String,
             required: false
