@@ -138,7 +138,7 @@ exports.getStepOneById = (id, projection, callback) => {
  * @param: callback: callback function wich will response stepOne or error
  * @return: callback object
  **/
-exports.getStepOne = (projection, callback) => {
+exports.getStepOne = (callback) => {
 
     RecommendationModel.StepOne.find({
        
