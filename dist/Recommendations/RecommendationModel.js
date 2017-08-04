@@ -19,10 +19,6 @@ _dbConfig.db.once('open', function () {
 
     var stepOneSchema = new schema({
 
-        icon: {
-            type: String,
-            required: false
-        },
         name: {
             type: String,
             required: false
@@ -37,10 +33,6 @@ _dbConfig.db.once('open', function () {
 
     var stepTwoSchema = new schema({
 
-        icon: {
-            type: String,
-            required: false
-        },
         name: {
             type: String,
             required: false
@@ -59,10 +51,6 @@ _dbConfig.db.once('open', function () {
 
     var stepThreeSchema = new schema({
 
-        icon: {
-            type: String,
-            required: false
-        },
         name: {
             type: String,
             required: false
