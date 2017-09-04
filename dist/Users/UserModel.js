@@ -17,9 +17,50 @@ _dbConfig.db.once('open', function () {
 
 	var schema = _mongoose2.default.Schema;
 
+	var studentSchema = new schema({
+		college: {
+			type: String,
+			required: false
+		},
+		season: {
+			type: String,
+			required: true
+		},
+		interestArea: {
+			type: String,
+			required: true
+		}
+	});
+
+	var lawyerSchema = new schema({
+		ocupationArea: {
+			type: String,
+			required: true
+		},
+		employment: {
+			type: String,
+			required: true
+		},
+		OABRegister: {
+			type: String,
+			required: true
+		}
+	});
+
+	var citizenSchema = new schema({
+		cpf: {
+			type: String,
+			required: true
+		},
+		birthDate: {
+			type: Date,
+			required: false
+		}
+	});
+
 	var userSchema = new schema({
 
-		nomeCompleto: {
+		name: {
 			type: String,
 			default: "",
 			required: false
@@ -29,11 +70,28 @@ _dbConfig.db.once('open', function () {
 			default: "",
 			required: false
 		},
-		senha: {
+		userType: {
+			type: String,
+			required: false
+		},
+		password: {
 			type: String,
 			required: true
 		},
-		dataCadastro: {
+
+		// student: {
+		// 	type: studentSchema,
+		// 	required: true
+		// },
+		// lawyer: {
+		// 	type: lawyerSchema,
+		// 	required: true
+		// },
+		// citizen: {
+		// 	type: citizenSchema,
+		// 	required: true
+		// },
+		registerDate: {
 			type: Date,
 			default: Date.now,
 			required: true

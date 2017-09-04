@@ -139,7 +139,7 @@ exports.getStepOneById = (id, projection, callback) => {
  * @return: callback object
  **/
 exports.getStepOne = (callback) => {
-
+    console.log(Utils.normalizeText("Eu quero saber da minha conta de lúz"));
     RecommendationModel.StepOne.find({
        
     })
@@ -322,6 +322,38 @@ exports.getStepThreeById = (id, projection, callback) => {
 
     RecommendationModel.StepThree.find({
         "stepTwo._id": id
+    })
+        //.select(projection)
+        .exec((error, stepThree) => {
+
+            if (error) {
+
+                callback({
+                    "done": false,
+                    "error": error,
+                    "message": "Failed on get term"
+                });
+
+            } else {
+                callback({
+                    done: true,
+                    "stepThree": stepThree
+                });
+            }
+        });
+};
+
+/**
+ * Function for get stepThree by Id
+ * @param: id: familygroup id wich will be found
+ * @param: projection: what will be returned
+ * @param: callback: callback function wich will response stepThree or error
+ * @return: callback object
+ **/
+exports.getStepThreeByTags = (tags, projection, callback) => {
+    
+    RecommendationModel.StepThree.find({
+        
     })
         //.select(projection)
         .exec((error, stepThree) => {

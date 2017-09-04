@@ -15,7 +15,7 @@ const UserRoute = express.Router();
 UserRoute.post('/login', (req, res) => {
 
 	//expressValidator check validation using UserSchemaValidation
-	req.checkBody(UserSchemaValidation.userInsertValidation);
+	//req.checkBody(UserSchemaValidation.userInsertValidation);
 
 	req.getValidationResult().then(function (result) {
 		//check if validation result has any error

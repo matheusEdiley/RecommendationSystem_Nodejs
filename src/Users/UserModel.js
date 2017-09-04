@@ -9,9 +9,50 @@ db.once('open', () => {
 
 	const schema = mongoose.Schema;
 
+	const studentSchema = new schema({
+		college: {
+			type: String,
+			required: false
+		},
+		season: {
+			type: String,
+			required: true
+		},
+		interestArea: {
+			type: String,
+			required: true
+		}
+	});
+
+	const lawyerSchema = new schema({
+		ocupationArea: {
+			type: String,
+			required: true
+		},
+		employment: {
+			type: String,
+			required: true
+		},
+		OABRegister: {
+			type: String,
+			required: true
+		}
+	});
+
+	const citizenSchema = new schema({
+		cpf: {
+			type: String,
+			required: true
+		}, 
+		birthDate: {
+			type: Date,
+			required: false,
+		}
+	});
+
 	const userSchema = new schema({
 
-		nomeCompleto: {
+		name: {
 			type: String,
 			default: "",
 			required: false
@@ -21,11 +62,28 @@ db.once('open', () => {
 			default: "",
 			required: false
 		},
-		senha: {
+		userType: {
+			type: String,
+			required: false
+		},
+		password: {
 			type: String,
 			required: true
 		},
-		dataCadastro: {
+
+		// student: {
+		// 	type: studentSchema,
+		// 	required: true
+		// },
+		// lawyer: {
+		// 	type: lawyerSchema,
+		// 	required: true
+		// },
+		// citizen: {
+		// 	type: citizenSchema,
+		// 	required: true
+		// },
+		registerDate: {
 			type: Date,
 			default: Date.now,
 			required: true,
