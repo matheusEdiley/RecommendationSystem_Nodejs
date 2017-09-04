@@ -37,7 +37,7 @@ var UserRoute = _express2.default.Router();
 UserRoute.post('/login', function (req, res) {
 
 	//expressValidator check validation using UserSchemaValidation
-	req.checkBody(_UserSchemaValidation.UserSchemaValidation.userInsertValidation);
+	//req.checkBody(UserSchemaValidation.userInsertValidation);
 
 	req.getValidationResult().then(function (result) {
 		//check if validation result has any error

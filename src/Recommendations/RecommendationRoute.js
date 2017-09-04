@@ -73,6 +73,22 @@ RecommendationRoute.get('/:id/stepthree', (req, res) => {
 
 /**
  * Method HTTP: GET
+ * URI        : /recommendations/stepthree
+ * URL        : /stepthree
+ * Param	  : recommendations stepthree id wich will be returned
+ * Get recommendations stepthree by tags
+ **/
+RecommendationRoute.get('/stepthree', (req, res) => {
+
+    const tags = req.body;
+    const projection = "";
+    RecommendationController.getStepThreeByTags(tags, projection, (response) => {
+        res.json(response);
+    });
+});
+
+/**
+ * Method HTTP: GET
  * URI        : /recommendations/:id/recommendation
  * URL        : /:id/recommendation
  * Param	  : recommendations id wich will be returned

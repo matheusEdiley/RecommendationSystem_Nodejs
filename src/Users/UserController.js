@@ -18,21 +18,14 @@ exports.insertUser = (userPersist, callback) => {
 	//let id = userPersist._id ? new ObjectId(userPersist._id) : new mongoose.Types.ObjectId;
 
 	UserModel.User.findOne({
-		telefone: userPersist.telefone
+		email: userPersist.email
 	},
 		(error, user) => {
 			if (user) {
-				if (user.senha === userPersist.senha) {
-					callback({
-						done: true,
-						"user": user
-					});
-				} else {
-					callback({
-						done: false,
-						"message": "Telefone já cadastrado, verifique sua senha."
-					});
-				}
+				callback({
+					done: false,
+					"message": "Email já cadastrado, verifique sua senha."
+				});
 			} else {
 				UserModel.User.create(
 					userPersist,
@@ -64,10 +57,10 @@ exports.insertUser = (userPersist, callback) => {
 exports.updateUser = (userId, userPersist, callback) => {
 
 	UserModel.User.findOne({
-		$or: [{telefone: userPersist.telefone}, {_id: userPersist._id}]
+		$or: [{ telefone: userPersist.telefone }, { _id: userPersist._id }]
 	},
 		(error, user) => {
-			if(error) {
+			if (error) {
 				callback({
 					done: false,
 					message: "Ocorreu um erro inesperado"
@@ -90,7 +83,7 @@ exports.updateUser = (userId, userPersist, callback) => {
 							});
 						} else {
 							callback({
-								 done: true,
+								done: true,
 								"user": user
 							});
 						}

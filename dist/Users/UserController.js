@@ -33,20 +33,13 @@ exports.insertUser = function (userPersist, callback) {
 	//let id = userPersist._id ? new ObjectId(userPersist._id) : new mongoose.Types.ObjectId;
 
 	_UserModel2.default.User.findOne({
-		telefone: userPersist.telefone
+		email: userPersist.email
 	}, function (error, user) {
 		if (user) {
-			if (user.senha === userPersist.senha) {
-				callback({
-					done: true,
-					"user": user
-				});
-			} else {
-				callback({
-					done: false,
-					"message": "Telefone já cadastrado, verifique sua senha."
-				});
-			}
+			callback({
+				done: false,
+				"message": "Email já cadastrado, verifique sua senha."
+			});
 		} else {
 			_UserModel2.default.User.create(userPersist, function (err, user) {
 				if (err) {
