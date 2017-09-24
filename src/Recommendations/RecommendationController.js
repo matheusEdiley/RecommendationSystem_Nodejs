@@ -141,7 +141,7 @@ exports.getStepOneById = (id, projection, callback) => {
 exports.getStepOne = (callback) => {
     console.log(Utils.normalizeText("Eu quero saber da minha conta de lúz"));
     RecommendationModel.StepOne.find({
-       
+
     })
         //.select(projection)
         .exec((error, stepOnes) => {
@@ -343,6 +343,18 @@ exports.getStepThreeById = (id, projection, callback) => {
         });
 };
 
+Array.prototype.countMatches = function (arr2) {
+    this.sort();
+    arr2.sort();
+    var count = 0;
+    for (var i = 0; i < this.length; i += 1) {
+        if (arr2.indexOf(this[i]) > -1) {
+            count++;
+        }
+    }
+    return count;
+};
+
 /**
  * Function for get stepThree by Id
  * @param: id: familygroup id wich will be found
@@ -351,9 +363,9 @@ exports.getStepThreeById = (id, projection, callback) => {
  * @return: callback object
  **/
 exports.getStepThreeByTags = (tags, projection, callback) => {
-    
+    //let search = Utils.normalizeText(tags);
     RecommendationModel.StepThree.find({
-        
+
     })
         //.select(projection)
         .exec((error, stepThree) => {
@@ -367,6 +379,13 @@ exports.getStepThreeByTags = (tags, projection, callback) => {
                 });
 
             } else {
+                // let vet = [];
+                // stepThree.forEach(function (element, index) {
+                //     if (element.tags.countMatches(search) > 1) {
+                //         element.count = element.tags.countMatches(search);
+                //         vet.push(element);
+                //     }
+                // });
                 callback({
                     done: true,
                     "stepThree": stepThree
@@ -374,6 +393,8 @@ exports.getStepThreeByTags = (tags, projection, callback) => {
             }
         });
 };
+
+
 
 /**
  * Function for create stepThree

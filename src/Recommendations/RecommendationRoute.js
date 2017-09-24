@@ -80,7 +80,7 @@ RecommendationRoute.get('/:id/stepthree', (req, res) => {
  **/
 RecommendationRoute.get('/stepthree', (req, res) => {
 
-    const tags = req.body;
+    const tags = "";
     const projection = "";
     RecommendationController.getStepThreeByTags(tags, projection, (response) => {
         res.json(response);

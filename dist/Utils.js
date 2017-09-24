@@ -94,7 +94,7 @@ var stringToWordArray = function stringToWordArray(text) {
 
 exports.normalizeText = function (text) {
 
-    text = text.toLowerCase();
+    //text = text.toLowerCase();
     text = removeStopWords(text);
     text = removeAccents(text);
     text = removeSpecialCharacter(text);

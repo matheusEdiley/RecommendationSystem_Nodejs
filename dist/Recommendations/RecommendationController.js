@@ -342,6 +342,18 @@ exports.getStepThreeById = function (id, projection, callback) {
     });
 };
 
+Array.prototype.countMatches = function (arr2) {
+    this.sort();
+    arr2.sort();
+    var count = 0;
+    for (var i = 0; i < this.length; i += 1) {
+        if (arr2.indexOf(this[i]) > -1) {
+            count++;
+        }
+    }
+    return count;
+};
+
 /**
  * Function for get stepThree by Id
  * @param: id: familygroup id wich will be found
@@ -350,7 +362,7 @@ exports.getStepThreeById = function (id, projection, callback) {
  * @return: callback object
  **/
 exports.getStepThreeByTags = function (tags, projection, callback) {
-
+    //let search = Utils.normalizeText(tags);
     _RecommendationModel2.default.StepThree.find({})
     //.select(projection)
     .exec(function (error, stepThree) {
@@ -363,6 +375,13 @@ exports.getStepThreeByTags = function (tags, projection, callback) {
                 "message": "Failed on get term"
             });
         } else {
+            // let vet = [];
+            // stepThree.forEach(function (element, index) {
+            //     if (element.tags.countMatches(search) > 1) {
+            //         element.count = element.tags.countMatches(search);
+            //         vet.push(element);
+            //     }
+            // });
             callback({
                 done: true,
                 "stepThree": stepThree

@@ -29,12 +29,12 @@ var UserRoute = _express2.default.Router();
 
 /**
 * Method HTTP: POST
-* URI        : /users/login
-* URL        : /login
+* URI        : /users/user
+* URL        : /user
 * Register users route
 **/
 //for express validator
-UserRoute.post('/login', function (req, res) {
+UserRoute.post('/user', function (req, res) {
 
 	//expressValidator check validation using UserSchemaValidation
 	//req.checkBody(UserSchemaValidation.userInsertValidation);
@@ -52,6 +52,35 @@ UserRoute.post('/login', function (req, res) {
 		var user = req.body;
 		console.log(JSON.stringify(user));
 		_UserController2.default.insertUser(user, function (response) {
+			res.json(response);
+		});
+	});
+});
+
+/**
+* Method HTTP: POST
+* URI        : /users/login
+* URL        : /login
+* Register users route
+**/
+UserRoute.post('/login', function (req, res) {
+
+	//expressValidator check validation using UserSchemaValidation
+	//req.checkBody(UserSchemaValidation.userInsertValidation);
+
+	req.getValidationResult().then(function (result) {
+		//check if validation result has any error
+		if (!result.isEmpty()) {
+			res.status(400).send({
+				"done": false,
+				"errors": result.array()
+			});
+			return;
+		}
+
+		var user = req.body;
+		//console.log(JSON.stringify(user));
+		_UserController2.default.loginUser(user, function (response) {
 			res.json(response);
 		});
 	});

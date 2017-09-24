@@ -47,6 +47,41 @@ exports.insertUser = (userPersist, callback) => {
 		});
 };
 
+
+/**
+ * Function for login user
+ * @param: user
+ * @param: callback: callback function wich will response true or false
+ * @return: callback object
+ **/
+exports.loginUser = (userPersist, callback) => {
+	console.log(userPersist);
+	UserModel.User.findOne({
+		email: userPersist.email
+	},
+		(error, user) => {
+			if (user) {
+				if (user.password === userPersist.password) {
+					callback({
+						done: true,
+						"user": user
+					});
+				} else {
+					callback({
+						done: false,
+						"message": "Senha incorreta, tente novamente!"
+					});
+				}
+
+			} else {
+				callback({
+					done: false,
+					"message": "Email não cadastrado, registre-se."
+				});
+			}
+		});
+};
+
 /**
  * Function for update user
  * @param: userId: user id to update

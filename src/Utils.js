@@ -87,7 +87,7 @@ let stringToWordArray = (text) => {
 
 exports.normalizeText = (text) => {
 
-    text = text.toLowerCase();
+    //text = text.toLowerCase();
     text = removeStopWords(text);
     text = removeAccents(text);
     text = removeSpecialCharacter(text);

@@ -8,11 +8,11 @@ const UserRoute = express.Router();
 
 /**
 * Method HTTP: POST
-* URI        : /users/login
-* URL        : /login
+* URI        : /users/user
+* URL        : /user
 * Register users route
 **/
-UserRoute.post('/login', (req, res) => {
+UserRoute.post('/user', (req, res) => {
 
 	//expressValidator check validation using UserSchemaValidation
 	//req.checkBody(UserSchemaValidation.userInsertValidation);
@@ -34,6 +34,37 @@ UserRoute.post('/login', (req, res) => {
 		});
 	});
 });
+
+/**
+* Method HTTP: POST
+* URI        : /users/login
+* URL        : /login
+* Register users route
+**/
+UserRoute.post('/login', (req, res) => {
+
+	//expressValidator check validation using UserSchemaValidation
+	//req.checkBody(UserSchemaValidation.userInsertValidation);
+
+	req.getValidationResult().then(function (result) {
+		//check if validation result has any error
+		if (!result.isEmpty()) {
+			res.status(400).send({
+				"done": false,
+				"errors": result.array()
+			});
+			return;
+		}
+
+		const user = req.body;
+		//console.log(JSON.stringify(user));
+		UserController.loginUser(user, (response) => {
+			res.json(response);
+		});
+	});
+});
+
+
 
 /**
 * Method HTTP: POST

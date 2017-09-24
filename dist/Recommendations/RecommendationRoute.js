@@ -97,7 +97,7 @@ RecommendationRoute.get('/:id/stepthree', function (req, res) {
  **/
 RecommendationRoute.get('/stepthree', function (req, res) {
 
-    var tags = req.body;
+    var tags = "";
     var projection = "";
     _RecommendationController2.default.getStepThreeByTags(tags, projection, function (response) {
         res.json(response);
