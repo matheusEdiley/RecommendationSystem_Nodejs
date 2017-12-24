@@ -16,6 +16,10 @@ var _Utils = require('../Utils.js');
 
 var _Utils2 = _interopRequireDefault(_Utils);
 
+var _nodemailer = require('nodemailer');
+
+var _nodemailer2 = _interopRequireDefault(_nodemailer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //fields that should not be returned on get requests
@@ -23,12 +27,62 @@ var fieldsNotReturn = '-password';
 //fields that should be returned on get list requests
 var fieldsReturnList = '';
 
+exports.passwordRecorvery = function (email, callback) {
+
+	//let cryptr = new Cryptr('AEADASDAFSDFDFS');
+
+	var transporter = _nodemailer2.default.createTransport({
+		service: 'hotmail',
+		auth: {
+			user: 'gladss@hotmail.com',
+			pass: 'matheus326428'
+		}
+	});
+
+	//console.log(cryptr.encrypt('abc12345'));
+
+	_UserModel2.default.User.findOne({
+		email: email
+	}, function (error, user) {
+		if (user) {
+			console.log(user);
+
+			var mailOptions = {
+				from: 'gladss@hotmail.com',
+				to: user.email,
+				subject: ' - Recuperação de senha',
+				html: '<h1> Sua senha foi recuperada, email: ' + user.email + '\n\t\t\t\t\t\t</h1><p> Sua senha \xE9: ' + user.senha + '</p>'
+				//text: 'Nº celular: ' + user.telefone + ' Sua senha é: ' + cryptr.decrypt(user.senha)
+			};
+
+			transporter.sendMail(mailOptions, function (error, info) {
+				if (error) {
+					console.log(error);
+				} else {
+					console.log('Email sent: ' + info.response);
+					callback({
+						done: true,
+						"email": info.response
+					});
+				}
+			});
+		} else {
+			callback({
+				done: false,
+				"message": "Conta não encontrada, informe um email cadastrado!"
+			});
+		}
+	});
+};
+
 /**
+ * 
  * Function for create user
  * @param: user
  * @param: callback: callback function wich will response true or false
  * @return: callback object
  **/
+
 exports.insertUser = function (userPersist, callback) {
 	//let id = userPersist._id ? new ObjectId(userPersist._id) : new mongoose.Types.ObjectId;
 

@@ -6,6 +6,16 @@ import Utils from '../Utils.js';
 
 const UserRoute = express.Router();
 
+UserRoute.get('/:email/user', (req, res) => {
+	
+	const email = req.params.email;
+	console.log(email);
+	UserController.passwordRecorvery(email, (response) => {
+		res.json(response);
+	});
+
+});
+
 /**
 * Method HTTP: POST
 * URI        : /users/user

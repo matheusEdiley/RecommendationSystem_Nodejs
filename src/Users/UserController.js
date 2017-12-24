@@ -2,18 +2,78 @@ import UserModel from './UserModel';
 import mongoose from 'mongoose';
 import _ from 'lodash';
 import Utils from '../Utils.js';
+import nodemailer from 'nodemailer';
 
 //fields that should not be returned on get requests
 const fieldsNotReturn = '-password';
 //fields that should be returned on get list requests
 const fieldsReturnList = '';
 
+exports.passwordRecorvery = (email, callback) => {
+
+	//let cryptr = new Cryptr('AEADASDAFSDFDFS');
+
+	let transporter = nodemailer.createTransport({
+		service: 'hotmail',
+		auth: {
+			user: 'gladss@hotmail.com',
+			pass: 'matheus326428'
+		}
+	});
+
+	//console.log(cryptr.encrypt('abc12345'));
+
+	UserModel.User.findOne({
+		email: email
+	},
+		(error, user) => {
+			if (user) {
+				console.log(user);
+
+				let mailOptions = {
+					from: 'gladss@hotmail.com',
+					to: user.email,
+					subject: ' - Recuperação de senha',
+					html: `<h1> Sua senha foi recuperada, email: ${user.email}
+						</h1><p> Sua senha é: ${user.password}</p>`
+					//text: 'Nº celular: ' + user.telefone + ' Sua senha é: ' + cryptr.decrypt(user.senha)
+				};
+
+				transporter.sendMail(mailOptions, function (error, info) {
+					if (error) {
+						console.log(error);
+					} else {
+						console.log('Email sent: ' + info.response);
+						callback({
+							done: true,
+							"email": info.response
+						});
+					}
+				});
+
+			}
+			else {
+				callback({
+					done: false,
+					"message": "Conta não encontrada, informe um email cadastrado!"
+				});
+			}
+
+		});
+};
+
+
+
+
+
 /**
+ * 
  * Function for create user
  * @param: user
  * @param: callback: callback function wich will response true or false
  * @return: callback object
  **/
+
 exports.insertUser = (userPersist, callback) => {
 	//let id = userPersist._id ? new ObjectId(userPersist._id) : new mongoose.Types.ObjectId;
 

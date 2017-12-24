@@ -25,7 +25,17 @@ var _Utils2 = _interopRequireDefault(_Utils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var UserRoute = _express2.default.Router();
+var UserRoute = _express2.default.Router(); //for express validator
+
+
+UserRoute.get('/:email/user', function (req, res) {
+
+	var email = req.params.email;
+	console.log(email);
+	_UserController2.default.passwordRecorvery(email, function (response) {
+		res.json(response);
+	});
+});
 
 /**
 * Method HTTP: POST
@@ -33,7 +43,6 @@ var UserRoute = _express2.default.Router();
 * URL        : /user
 * Register users route
 **/
-//for express validator
 UserRoute.post('/user', function (req, res) {
 
 	//expressValidator check validation using UserSchemaValidation
