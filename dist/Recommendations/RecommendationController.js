@@ -34,7 +34,7 @@ var fieldsReturnList = '';
 exports.getRecommendationById = function (id, projection, callback) {
 
     _RecommendationModel2.default.Recommendation.findOne({
-        "stepThree._id": id
+        "stepThreeId": id
     })
     //.select(projection)
     .exec(function (error, recommendation) {
@@ -205,7 +205,7 @@ exports.removeStepOne = function (id, callback) {
         _id: id
     })
     //.select(projection)
-    .exec(function (error, familygroup) {
+    .exec(function (error, stepOne) {
 
         if (error) {
 
@@ -235,7 +235,7 @@ exports.removeStepOne = function (id, callback) {
 exports.getStepTwoById = function (id, projection, callback) {
 
     _RecommendationModel2.default.StepTwo.find({
-        "stepOne._id": id
+        "stepOneId": id
     })
     //.select(projection)
     .exec(function (error, stepTwo) {
@@ -321,7 +321,7 @@ exports.removeStepTwo = function (id, callback) {
 exports.getStepThreeById = function (id, projection, callback) {
 
     _RecommendationModel2.default.StepThree.find({
-        "stepTwo._id": id
+        "stepTwoId": id
     })
     //.select(projection)
     .exec(function (error, stepThree) {

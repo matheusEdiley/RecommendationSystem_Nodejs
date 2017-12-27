@@ -26,6 +26,10 @@ _dbConfig.db.once('open', function () {
         description: {
             type: String,
             required: true
+        },
+        examples: {
+            type: String,
+            required: true
         }
     }, {
         collection: 'stepOne'
@@ -41,10 +45,16 @@ _dbConfig.db.once('open', function () {
             type: String,
             required: true
         },
-        stepOne: {
-            type: stepOneSchema,
+        examples: {
+            type: String,
+            required: true
+        },
+        stepOneId: {
+            type: String,
+            ref: 'StepOne',
             required: true
         }
+
     }, {
         collection: 'stepTwo'
     });
@@ -63,8 +73,9 @@ _dbConfig.db.once('open', function () {
             type: [],
             required: true
         },
-        stepTwo: {
-            type: stepTwoSchema,
+        stepTwoId: {
+            type: String,
+            ref: 'StepTwo',
             required: true
         }
     }, {
@@ -88,8 +99,9 @@ _dbConfig.db.once('open', function () {
             type: String,
             required: true
         },
-        stepThree: {
-            type: stepThreeSchema,
+        stepThreeId: {
+            type: String,
+            ref: 'StepThree',
             required: true
         }
     }, {

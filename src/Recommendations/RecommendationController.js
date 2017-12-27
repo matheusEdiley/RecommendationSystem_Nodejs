@@ -19,7 +19,7 @@ const fieldsReturnList = '';
 exports.getRecommendationById = (id, projection, callback) => {
 
     RecommendationModel.Recommendation.findOne({
-        "stepThree._id": id
+        "stepThreeId": id
     })
         //.select(projection)
         .exec((error, recommendation) => {
@@ -200,7 +200,7 @@ exports.removeStepOne = (id, callback) => {
         _id: id
     })
         //.select(projection)
-        .exec((error, familygroup) => {
+        .exec((error, stepOne) => {
 
             if (error) {
 
@@ -231,7 +231,7 @@ exports.removeStepOne = (id, callback) => {
 exports.getStepTwoById = (id, projection, callback) => {
 
     RecommendationModel.StepTwo.find({
-        "stepOne._id": id
+        "stepOneId": id
     })
         //.select(projection)
         .exec((error, stepTwo) => {
@@ -321,7 +321,7 @@ exports.removeStepTwo = (id, callback) => {
 exports.getStepThreeById = (id, projection, callback) => {
 
     RecommendationModel.StepThree.find({
-        "stepTwo._id": id
+        "stepTwoId": id
     })
         //.select(projection)
         .exec((error, stepThree) => {

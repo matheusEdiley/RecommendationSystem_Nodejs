@@ -8,14 +8,18 @@ db.on('error', console.error.bind(console, 'Erro ao conectar no banco'));
 db.once('open', () => {
 
     const schema = mongoose.Schema;
-    
+
     const stepOneSchema = new schema({
-     
+
         name: {
             type: String,
             required: false
         },
         description: {
+            type: String,
+            required: true
+        },
+        examples: {
             type: String,
             required: true
         }
@@ -33,10 +37,16 @@ db.once('open', () => {
             type: String,
             required: true
         },
-        stepOne: {
-            type: stepOneSchema,
+        examples: {
+            type: String,
+            required: true
+        },
+        stepOneId: {
+            type: String,
+            ref: 'StepOne',
             required: true
         }
+
     }, {
             collection: 'stepTwo'
         });
@@ -55,8 +65,9 @@ db.once('open', () => {
             type: [],
             required: true
         },
-        stepTwo: {
-            type: stepTwoSchema,
+        stepTwoId: {
+            type: String,
+            ref: 'StepTwo',
             required: true
         }
     }, {
@@ -80,8 +91,9 @@ db.once('open', () => {
             type: String,
             required: true
         },
-        stepThree: {
-            type: stepThreeSchema,
+        stepThreeId: {
+            type: String,
+            ref: 'StepThree',
             required: true
         }
     }, {
@@ -92,5 +104,5 @@ db.once('open', () => {
     module.exports.StepTwo = mongoose.model('Steptwo', stepTwoSchema);
     module.exports.StepThree = mongoose.model('StepThree', stepThreeSchema);
     module.exports.Recommendation = mongoose.model('Recommendation', recommendationSchema);
-    
+
 });
