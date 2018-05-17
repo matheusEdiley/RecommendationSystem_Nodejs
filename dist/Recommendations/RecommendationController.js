@@ -149,7 +149,7 @@ exports.getStepOneById = function (id, projection, callback) {
  * @return: callback object
  **/
 exports.getStepOne = function (callback) {
-    console.log(_Utils2.default.normalizeText("Eu quero saber da minha conta de lúz"));
+
     _RecommendationModel2.default.StepOne.find({})
     //.select(projection)
     .exec(function (error, stepOnes) {
@@ -362,7 +362,8 @@ Array.prototype.countMatches = function (arr2) {
  * @return: callback object
  **/
 exports.getStepThreeByTags = function (tags, projection, callback) {
-    //let search = Utils.normalizeText(tags);
+    var search = _Utils2.default.normalizeText(tags);
+    console.log("Recuperação da informação: " + search);
     _RecommendationModel2.default.StepThree.find({})
     //.select(projection)
     .exec(function (error, stepThree) {
@@ -375,13 +376,14 @@ exports.getStepThreeByTags = function (tags, projection, callback) {
                 "message": "Failed on get term"
             });
         } else {
-            // let vet = [];
-            // stepThree.forEach(function (element, index) {
-            //     if (element.tags.countMatches(search) > 1) {
-            //         element.count = element.tags.countMatches(search);
-            //         vet.push(element);
-            //     }
-            // });
+            var vet = [];
+            stepThree.forEach(function (element, index) {
+                if (element.tags.countMatches(search) > 1) {
+                    element.count = element.tags.countMatches(search);
+                    vet.push(element);
+                }
+            });
+            console.log(vet);
             callback({
                 done: true,
                 "stepThree": stepThree

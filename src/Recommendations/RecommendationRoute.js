@@ -78,10 +78,11 @@ RecommendationRoute.get('/:id/stepthree', (req, res) => {
  * Param	  : recommendations stepthree id wich will be returned
  * Get recommendations stepthree by tags
  **/
-RecommendationRoute.get('/stepthree', (req, res) => {
+RecommendationRoute.post('/stepthree/tags', (req, res) => {
 
-    const tags = "";
+    const tags = req.body.tags;
     const projection = "";
+    console.log("Rota rec: " + tags);
     RecommendationController.getStepThreeByTags(tags, projection, (response) => {
         res.json(response);
     });
