@@ -3,9 +3,9 @@
 import mongoose from 'mongoose';
 import deploy from '../config/deploy.json'
 
-let devStringConnection = "mongodb://127.0.0.1:27017/direitoja";
-let testStringConnection = "mongodb://127.0.0.1:27017/ws_az_test";
-let deployString = "mongodb://direitoja:abc12345@ds127963.mlab.com:27963/direitoja"
+let devStringConnection = "mongodb://127.0.0.1:27017/db";
+let testStringConnection = "mongodb://127.0.0.1:27017/db_test";
+
 //busca a string de conexão com banco dos arquivos na pasta /config
 //a variavel DBHost corresponde a string de conexão de acordo com o modo de execução(dev, test)
 const db_string_conexao = deployString;
